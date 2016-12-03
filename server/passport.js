@@ -8,9 +8,9 @@ const LocalStrategy = require('passport-local').Strategy
 passport.use('login', new LocalStrategy(function (username, password, done) {
   User.findOne({
     'local.username': username,
-  }, function (err, user) {
-    if (err) {
-      return done(err)
+  }, function (errFind, user) {
+    if (errFind) {
+      return done(errFind)
     }
     if (!user) {
       return done(null, false, {
@@ -30,7 +30,6 @@ passport.use('login', new LocalStrategy(function (username, password, done) {
     })
   })
 }))
-
 
 module.exports = () => {
   passport.serializeUser((user, done) => {

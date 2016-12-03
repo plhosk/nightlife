@@ -1,4 +1,4 @@
-/* eslint-disable func-names, prefer-arrow-callback */
+/* eslint-disable func-names, prefer-arrow-callback, no-underscore-dangle */
 
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt-nodejs')
@@ -55,7 +55,7 @@ userSchema.methods.name = function () {
 }
 
 userSchema.methods.getId = function () {
-  return this._id //eslint-disable-line
+  return this._id
 }
 
 module.exports = mongoose.model('User', userSchema)

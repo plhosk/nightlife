@@ -2,7 +2,7 @@ import React from 'react'
 import { Match } from 'react-router'
 
 import TopBar from './TopBar'
-import ErrorDisplay from './ErrorDisplay'
+import ErrorDisplay from './error/ErrorDisplay'
 import Index from './Index'
 import UserPassForm from './auth/UserPassForm'
 

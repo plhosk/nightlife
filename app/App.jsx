@@ -1,57 +1,17 @@
 import 'isomorphic-fetch'
-
-import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { combineReducers, applyMiddleware, compose, createStore } from 'redux'
+import React, { PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
-import createSagaMiddleware from 'redux-saga'
-
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 import Router from 'react-router-addons-controlled/ControlledBrowserRouter'
-import createBrowserHistory from 'history/createBrowserHistory'
 
-import routerReducer from './router'
-import errorReducer from './error'
-import authReducer from './auth/auth'
-
-import rootSaga from './sagas'
-
+import { history } from './reducer'
+import store from './store'
 import AppContent from './AppContent'
-
-const history = createBrowserHistory()
-export default history
-
 
 injectTapEventPlugin()
 
-const initialState = {
-  router: {
-    location: history.location,
-    action: history.action,
-  },
-  auth: {},
-  error: '',
-}
-
-const rootReducer = combineReducers({
-  router: routerReducer,
-  auth: authReducer,
-  error: errorReducer,
-})
-
-const sagaMiddleware = createSagaMiddleware()
-let storeEnhancers = applyMiddleware(sagaMiddleware)
-
-// add the redux dev tools
-if (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {
-  storeEnhancers = compose(storeEnhancers, window.devToolsExtension())
-}
-
-const store = createStore(rootReducer, initialState, storeEnhancers)
-
-sagaMiddleware.run(rootSaga)
 
 let App = props => (
   <Router
@@ -93,6 +53,8 @@ const mapStateToProps = state => ({
 App = connect(mapStateToProps)(App)
 
 ReactDOM.render(
-  <Provider store={store}><App /></Provider>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app'),
 )
