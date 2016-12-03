@@ -4,14 +4,11 @@ import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/IconButton'
-import ActionHome from 'material-ui/svg-icons/action/home'
+import MapsLocalBar from 'material-ui/svg-icons/maps/local-bar'
 import ActionAccountBox from 'material-ui/svg-icons/action/account-box'
 import ActionPermIdentity from 'material-ui/svg-icons/action/perm-identity'
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
 import SocialPerson from 'material-ui/svg-icons/social/person'
-
-import { getUserObject, logOut } from './auth/authDuck'
-import { navigate } from './routerDuck'
 
 const styles = {
   appBar: {
@@ -46,7 +43,7 @@ const styles = {
 class TopBar extends React.Component {
   componentWillMount() {
     // Refresh user state when loading page (including after login redirect)
-    this.props.dispatch(getUserObject())
+    this.props.dispatch({ type: 'USER_OBJECT_REQUEST' })
   }
 
   render() {
@@ -55,11 +52,15 @@ class TopBar extends React.Component {
     return (
       <AppBar
         style={styles.appBar}
-        title={<span style={styles.title}>App Title</span>}
-        onTitleTouchTap={() => dispatch(navigate({ pathname: '/' }, 'PUSH'))}
         iconElementLeft={
-          <IconButton onClick={() => dispatch(navigate({ pathname: '/' }, 'PUSH'))}>
-            <ActionHome />
+          <IconButton
+            onClick={() => dispatch({
+              type: 'NAVIGATE',
+              location: { pathname: '/' },
+              action: 'PUSH',
+            })}
+          >
+            <MapsLocalBar />
           </IconButton>
         }
         iconElementRight={
@@ -84,7 +85,7 @@ class TopBar extends React.Component {
                     label={<span style={styles.buttonText}>
                       Log Out
                     </span>}
-                    onClick={() => dispatch(logOut())}
+                    onClick={() => dispatch({ type: 'LOGOUT_REQUEST' })}
                   />
                 </Link>
               </div>
@@ -117,10 +118,7 @@ class TopBar extends React.Component {
 }
 
 TopBar.propTypes = {
-  user: PropTypes.objectOf({
-    id: PropTypes.string,
-    username: PropTypes.string,
-  }),
+  user: PropTypes.objectOf(React.PropTypes.string),
   dispatch: PropTypes.func,
 }
 

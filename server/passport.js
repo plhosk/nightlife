@@ -1,16 +1,26 @@
+/* eslint-disable prefer-arrow-callback, func-names */
+
 const passport = require('passport')
 const User = require('./models/user')
 
 const LocalStrategy = require('passport-local').Strategy
 
-passport.use('login', new LocalStrategy((username, password, done) => {
-  User.findOne({ 'local.username': username }).then((user) => {
+passport.use('login', new LocalStrategy(function (username, password, done) {
+  User.findOne({
+    'local.username': username,
+  }, function (err, user) {
+    if (err) {
+      return done(err)
+    }
     if (!user) {
       return done(null, false, {
         message: 'No user has that username!',
       })
     }
-    return user.validatePassword(password).then((isMatch) => {
+    return user.validatePassword(password, function (errValidate, isMatch) {
+      if (errValidate) {
+        return done(errValidate)
+      }
       if (isMatch) {
         return done(null, user)
       }
@@ -18,9 +28,9 @@ passport.use('login', new LocalStrategy((username, password, done) => {
         message: 'Invalid password.',
       })
     })
-    .catch(err => done(err, user))
   })
 }))
+
 
 module.exports = () => {
   passport.serializeUser((user, done) => {

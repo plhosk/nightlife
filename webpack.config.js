@@ -7,7 +7,7 @@ const buildPath = path.join(__dirname, 'public')
 const prod = process.argv.indexOf('-p') !== -1
 
 const config = {
-  entry: ['es6-promise', './app/App.jsx'],
+  entry: ['babel-polyfill', './app/App.jsx'],
   output: {
     path: buildPath,
     filename: 'bundle.js',

@@ -1,3 +1,5 @@
+/* eslint-disable func-names, prefer-arrow-callback */
+
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt-nodejs')
 
@@ -22,27 +24,38 @@ const userSchema = mongoose.Schema({
 
 const SALT_FACTOR = 10
 
-userSchema.pre('save', (done) => {
+userSchema.pre('save', function (done) {
   const user = this
-  if (!user.isModified('password')) {
+  if (!user.isModified('local.password')) {
     return done()
   }
-  return bcrypt.genSalt(SALT_FACTOR)
-    .then(salt => bcrypt.hash(user.password, salt, null))
-    .then((passwordHash) => {
-      user.password = passwordHash
+
+  return bcrypt.genSalt(SALT_FACTOR, (errSalt, salt) => {
+    if (errSalt) {
+      return done(errSalt)
+    }
+    return bcrypt.hash(user.local.password, salt, null, (errHash, passwordHash) => {
+      if (errHash) {
+        return done(errHash)
+      }
+      user.local.password = passwordHash
       return done()
     })
-    .catch(err => done(err))
+  })
 })
 
-userSchema.methods.validatePassword = (inputPassword, done) => {
-  bcrypt.compare(inputPassword, this.password, (error, isValid) => {
+userSchema.methods.validatePassword = function (inputPassword, done) {
+  bcrypt.compare(inputPassword, this.local.password, function (error, isValid) {
     done(error, isValid)
   })
 }
 
-userSchema.methods.name = () => this.displayName || this.local.username
-userSchema.methods.getId = () => this._id //eslint-disable-line
+userSchema.methods.name = function () {
+  return this.displayName || this.local.username
+}
+
+userSchema.methods.getId = function () {
+  return this._id //eslint-disable-line
+}
 
 module.exports = mongoose.model('User', userSchema)
