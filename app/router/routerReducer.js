@@ -2,6 +2,7 @@ export default function routerReducer(state = {}, action) {
   switch (action.type) {
     case 'NAVIGATE':
       return {
+        ...state,
         location: action.location,
         action: action.action,
       }
