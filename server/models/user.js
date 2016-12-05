@@ -20,6 +20,11 @@ const userSchema = mongoose.Schema({
     default: Date.now,
   },
   displayName: String,
+  attending: [{
+    yelpId: String,
+    date: { type: Date, default: Date.now },
+  }],
+  lastSearch: { type: String, default: '' },
 })
 
 const SALT_FACTOR = 10

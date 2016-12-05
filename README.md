@@ -1,14 +1,19 @@
 ## Nightlife Coordination App
 Paul Hoskinson (plhosk@gmail.com)
 
+- Find bars in your area.
+- See where other users of the app are planning to go.
+- While logged in, your search term will be saved.
+- While logged in, set your destination to let others know where you’re going.
 
 - Try the live version on Heroku: [https://nightlife-plhosk.herokuapp.com/](https://nightlife-plhosk.herokuapp.com/)
 - Github Repository: [https://github.com/plhosk/nightlife](https://github.com/plhosk/nightlife)
+- This app makes use of the [Yelp v2 Search API](https://www.yelp.ca/developers).
 
 ---
 
 ### Main Technologies
-- Client: React, Redux, React-Router, Material UI
+- Client: React, Redux, redux-saga, React Router, Material UI
 - Server: Node/Express, Mongoose, Passport
 
 ### Development Instructions

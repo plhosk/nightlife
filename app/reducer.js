@@ -2,8 +2,11 @@ import { combineReducers } from 'redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import routerReducer from './router/routerReducer'
-import errorReducer from './error/errorReducer'
 import authReducer from './auth/authReducer'
+import errorReducer from './error/errorReducer'
+import barsReducer from './bars/barsReducer'
+import searchReducer from './search/searchReducer'
+import attendingReducer from './attending/attendingReducer'
 
 const history = createBrowserHistory()
 
@@ -14,12 +17,21 @@ const initialState = {
   },
   auth: {},
   error: '',
+  bars: [],
+  search: {
+    lastSearch: '',
+    fetching: false,
+  },
+  attending: {},
 }
 
 const reducer = combineReducers({
   router: routerReducer,
   auth: authReducer,
   error: errorReducer,
+  bars: barsReducer,
+  search: searchReducer,
+  attending: attendingReducer,
 })
 
 export default reducer

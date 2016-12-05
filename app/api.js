@@ -1,3 +1,68 @@
+const attendingCountFetch = yelpId => (
+  fetch('/api/attending', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      yelpId,
+    }),
+  })
+  .then((response) => {
+    if (response.status === 200) {
+      return response.json()
+      .then(json => ({ response: json }))
+    }
+    return { error: response }
+  })
+  .catch(error => ({ error }))
+)
+
+const attendingAddFetch = yelpId => (
+  fetch('/api/attending', {
+    credentials: 'same-origin',
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      yelpId,
+    }),
+  })
+  .then((response) => {
+    if (response.status === 200) {
+      return { response: 'success' }
+    }
+    return { error: response }
+  })
+  .catch(error => ({ error }))
+)
+
+const barsFetch = search => (
+  fetch('/api/search', {
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      search,
+      category_filter: 'bars',
+    }),
+  })
+  .then((response) => {
+    if (response.status === 200) {
+      return response.json()
+      .then(json => ({ response: json }))
+    }
+    if (response.status === 204) {
+      return { response: 'empty' }
+    }
+    return { error: response }
+  })
+  .catch(error => ({ error }))
+)
+
 
 const userObjectFetch = () => (
     fetch('/api/login', {
@@ -77,6 +142,9 @@ const logoutFetch = () => (
 )
 
 const api = {
+  attendingCountFetch,
+  attendingAddFetch,
+  barsFetch,
   userObjectFetch,
   loginFetch,
   signupFetch,

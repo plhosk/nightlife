@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 const styles = {
   textField: {
     maxWidth: 200,
-    fontSize: '1.2em',
+    // fontSize: '1.2em',
   },
   button: {
     maxWidth: 200,
@@ -57,35 +57,33 @@ const UserPassForm = (props) => {
 
   return (
     <div>
-      <div>
-        <h1>{formTitle}</h1>
-        <form onSubmit={onSubmit}>
-          <TextField
-            style={styles.textField}
-            ref={(username) => { userInput = username }}
-            id="username"
-            type="text"
-            placeholder="Username"
-            required
-            autoFocus
-          />
-          <br />
-          <TextField
-            style={styles.textField}
-            ref={(password) => { passInput = password }}
-            id="password"
-            type="password"
-            placeholder="Password"
-            required
-          />
-          <br />
-          <RaisedButton
-            style={styles.button}
-            type="submit"
-            label={buttonLabel}
-          />
-        </form>
-      </div>
+      <h1>{formTitle}</h1>
+      <form onSubmit={onSubmit}>
+        <TextField
+          style={styles.textField}
+          ref={(username) => { userInput = username }}
+          id="username"
+          type="text"
+          placeholder="Username"
+          required
+          autoFocus
+        />
+        <br />
+        <TextField
+          style={styles.textField}
+          ref={(password) => { passInput = password }}
+          id="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <br />
+        <RaisedButton
+          style={styles.button}
+          type="submit"
+          label={buttonLabel}
+        />
+      </form>
     </div>
   )
 }

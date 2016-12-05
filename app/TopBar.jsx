@@ -30,13 +30,10 @@ const styles = {
     color: 'white',
     paddingTop: 6,
     marginBottom: 8,
-    paddingLeft: 8,
-    paddingRight: 8,
     textAlign: 'right',
-    flexBasis: 300,
   },
   buttonText: {
-    fontSize: '1.1em',
+    // fontSize: '1.1em',
   },
 }
 
@@ -67,16 +64,16 @@ class TopBar extends React.Component {
           <span style={styles.rightSpan}>
             {user &&
               <div>
-                <Link to={'/mycontent'}>
-                  <FlatButton
-                    style={styles.button}
-                    labelPosition={'after'}
-                    icon={<SocialPerson />}
-                    label={<span style={styles.buttonText}>
-                      {user.username}
-                    </span>}
-                  />
-                </Link>
+                { /* <Link to={'/mycontent'}> */ }
+                <FlatButton
+                  style={styles.button}
+                  labelPosition={'after'}
+                  icon={<SocialPerson />}
+                  label={<span style={styles.buttonText}>
+                    {user.username}
+                  </span>}
+                />
+                { /* </Link> */ }
                 <Link to={'#'}>
                   <FlatButton
                     style={styles.button}

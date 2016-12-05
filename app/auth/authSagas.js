@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 
 import { takeLatest, takeEvery } from 'redux-saga'
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 
 import api from '../api'
 
@@ -12,6 +12,9 @@ function* userObjectRequest() {
     yield put({ type: 'USER_OBJECT_EMPTY' })
   } else if (response) {
     yield put({ type: 'USER_OBJECT_SUCCESS', user: response })
+    if (response.lastSearch.length > 0) {
+      yield put({ type: 'BARS_SEARCH_REQUEST', search: response.lastSearch })
+    }
   } else {
     yield put({ type: 'USER_OBJECT_ERROR', error })
     yield put({ type: 'SHOW_ERROR_MESSAGE', error: 'Error getting user object.' })
@@ -32,6 +35,15 @@ function* loginRequest(action) {
   const { response, error } = yield call(api.loginFetch, action.username, action.password)
   if (response) {
     yield put({ type: 'LOGIN_SUCCESS', user: response })
+    let nextSearch = ''
+    if (response.lastSearch.length > 0) {
+      nextSearch = response.lastSearch
+    } else {
+      nextSearch = yield select(state => state.search.lastSearch)
+    }
+    if (nextSearch.length > 0) {
+      yield put({ type: 'BARS_SEARCH_REQUEST', search: nextSearch })
+    }
   } else {
     yield put({ type: 'LOGIN_FAILED', error })
     yield put({ type: 'SHOW_ERROR_MESSAGE', error: 'Login failed. Username or password may be incorrect.' })

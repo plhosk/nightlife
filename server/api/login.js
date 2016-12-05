@@ -21,9 +21,15 @@ router.route('/')
           return next(errLogin)
         }
         // login successful. send user info
+        let attending = ''
+        if (user.attending.length > 0) {
+          attending = user.attending[0].yelpId
+        }
         return res.send({
           id: user._id,
           username: user.local.username,
+          lastSearch: user.lastSearch,
+          attending,
         })
       })
     })(req, res, next)
@@ -31,9 +37,15 @@ router.route('/')
 
   .get((req, res) => {
     if (req.isAuthenticated()) {
+      let attending = ''
+      if (req.user.attending.length > 0) {
+        attending = req.user.attending[0].yelpId
+      }
       res.send({
         id: req.user._id,
         username: req.user.local.username,
+        lastSearch: req.user.lastSearch,
+        attending,
       })
     } else {
       res.sendStatus(204) // user not authenticated. send 204 (no content)

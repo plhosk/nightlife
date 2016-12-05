@@ -49,6 +49,8 @@ app.use(express.static('public'))
 app.use('/api/signup', require('./api/signup'))
 app.use('/api/login', require('./api/login'))
 app.use('/api/logout', require('./api/logout'))
+app.use('/api/search', require('./api/search'))
+app.use('/api/attending', require('./api/attending'))
 
 // default route for single-page app
 app.use('/', (req, res) => {
