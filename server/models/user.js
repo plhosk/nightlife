@@ -7,12 +7,20 @@ const userSchema = mongoose.Schema({
   local: {
     username: {
       type: String,
-      required: true,
       unique: true,
     },
     password: {
       type: String,
-      required: true,
+    },
+  },
+  github: {
+    username: {
+      type: String,
+      unique: true,
+    },
+    id: {
+      type: Number,
+      unique: true,
     },
   },
   createdAt: {
