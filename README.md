@@ -4,8 +4,9 @@ Paul Hoskinson (plhosk@gmail.com)
 - Find bars in your area.
 - See where other users of the app are planning to go.
 - While logged in, your search term will be saved.
-- While logged in, set your destination to let others know where you’re going.
+- While logged in, set your destination to let others know where you're going.
 
+---
 
 - Try the live version on Heroku: [https://nightlife-plhosk.herokuapp.com/](https://nightlife-plhosk.herokuapp.com/)
 - Github Repository: [https://github.com/plhosk/nightlife](https://github.com/plhosk/nightlife)
