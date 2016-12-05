@@ -56,7 +56,7 @@ userSchema.methods.validatePassword = function (inputPassword, done) {
 }
 
 userSchema.methods.name = function () {
-  return this.displayName || this.local.username
+  return this.displayName || this.github.username || this.local.username
 }
 
 userSchema.methods.getId = function () {

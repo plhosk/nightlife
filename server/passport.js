@@ -31,6 +31,40 @@ passport.use('login', new LocalStrategy(function (username, password, done) {
   })
 }))
 
+const GitHubStrategy = require('passport-github2').Strategy
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK_URL,
+},
+function (accessToken, refreshToken, profile, done) {
+  // check user table for anyone with a github ID of profile.id
+  User.findOne({
+    'github.id': profile.id,
+  }, function (errFind, user) {
+    if (errFind) {
+      return done(errFind)
+    }
+    // No user was found... so create a new user with values from GitHub (all the profile. stuff)
+    if (!user) {
+      user = new User({ // eslint-disable-line
+        'github.username': profile.username,
+        'github.id': profile.id,
+      })
+      return user.save(function (errSave) {
+        if (errSave) {
+          return done(errSave)
+        }
+        return done(errSave, user)
+      })
+    }
+    // found user. Return
+    return done(errFind, user)
+  })
+}))
+
+
 module.exports = () => {
   passport.serializeUser((user, done) => {
     done(null, user._id) //eslint-disable-line

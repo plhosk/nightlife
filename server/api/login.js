@@ -27,7 +27,7 @@ router.route('/')
         }
         return res.send({
           id: user._id,
-          username: user.local.username,
+          username: user.name(),
           lastSearch: user.lastSearch,
           attending,
         })
@@ -43,7 +43,7 @@ router.route('/')
       }
       res.send({
         id: req.user._id,
-        username: req.user.local.username,
+        username: req.user.name(),
         lastSearch: req.user.lastSearch,
         attending,
       })

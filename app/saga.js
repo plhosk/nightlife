@@ -1,10 +1,10 @@
-import { take } from 'redux-saga/effects'
+// import { take } from 'redux-saga/effects'
 
 import authSagas from './auth/authSagas'
 import barsSagas from './bars/barsSagas'
 import attendingSagas from './attending/attendingSagas'
 
-
+/*
 // Log every Redux action
 function* logActions() {
   while (true) { //eslint-disable-line
@@ -14,10 +14,11 @@ function* logActions() {
     // console.log(`state ${JSON.stringify(state)}`) //eslint-disable-line
   }
 }
+*/
 
 export default function* rootSaga() {
   yield [
-    logActions(),
+    // logActions(),
     authSagas(),
     barsSagas(),
     attendingSagas(),

@@ -1,17 +1,27 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import MapsLocalBar from 'material-ui/svg-icons/maps/local-bar'
+import { indigo500 } from 'material-ui/styles/colors'
 
 const styles = {
   outerDiv: {
     padding: '10px 0',
     lineHeight: '1.2em',
   },
+  martini: {
+    position: 'relative',
+    top: 7,
+    padding: 4,
+  },
+  title: {
+    color: indigo500,
+  },
 }
 
 const Index = props => (
   <div style={styles.outerDiv}>
-    <h2>Nightlife</h2>
-    {props.user && <h4>Welcome {props.user.username}!</h4>}
+    <h2 style={styles.title}><MapsLocalBar style={styles.martini} color={indigo500} />Nightlife</h2>
+    {props.user && <h4>Welcome, {props.user.username}!</h4>}
     <ul>
       <li>Find bars in your area.</li>
       <li>See where other users of the app are planning to go.</li>

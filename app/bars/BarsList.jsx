@@ -69,8 +69,11 @@ const BarsList = (props) => {
   if (props.search.fetching) {
     return (
       <Paper style={styles.outerDiv}>
-        <CircularProgress /><br />
-        <h3>Searching...</h3>
+        <div style={{ textAlign: 'center' }}>
+          <br />
+          <CircularProgress /><br />
+          <h3>Searching...</h3>
+        </div>
       </Paper>
     )
   }
@@ -138,6 +141,11 @@ const BarsList = (props) => {
                       props.dispatch({ type: 'ATTENDING_ADD_REQUEST', yelpId: bar.id })
                     }}
                   />
+                )}
+                {!props.user && (
+                  <p style={{ color: '#03A9F4' }}>
+                    Log in to set<br />your destination
+                  </p>
                 )}
               </div>
             </div>

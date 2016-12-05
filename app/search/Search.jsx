@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import { indigo500 } from 'material-ui/styles/colors'
 
 const styles = {
   outerDiv: {
@@ -11,16 +12,17 @@ const styles = {
     // margin: '0 auto',
   },
   textField: {
-    width: 300,
+    width: 280,
     fontSize: '1.2em',
   },
   button: {
-    width: 300,
+    width: 280,
     marginTop: 10,
   },
   searchInstruct: {
     fontWeight: 'bold',
     fontSize: '1.3em',
+    color: indigo500,
   },
 }
 

@@ -3,7 +3,21 @@ import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
+import GitHub from './GitHub'
+
 const styles = {
+  outerDiv: {
+    maxWidth: 500,
+    margin: '0 auto',
+    textAlign: 'center',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  form: {
+    flexGrow: 1,
+  },
   textField: {
     maxWidth: 200,
     // fontSize: '1.2em',
@@ -56,34 +70,37 @@ const UserPassForm = (props) => {
   }
 
   return (
-    <div>
-      <h1>{formTitle}</h1>
-      <form onSubmit={onSubmit}>
-        <TextField
-          style={styles.textField}
-          ref={(username) => { userInput = username }}
-          id="username"
-          type="text"
-          placeholder="Username"
-          required
-          autoFocus
-        />
-        <br />
-        <TextField
-          style={styles.textField}
-          ref={(password) => { passInput = password }}
-          id="password"
-          type="password"
-          placeholder="Password"
-          required
-        />
-        <br />
-        <RaisedButton
-          style={styles.button}
-          type="submit"
-          label={buttonLabel}
-        />
-      </form>
+    <div style={styles.outerDiv}>
+      <div style={styles.form}>
+        <h1>{formTitle}</h1>
+        <form onSubmit={onSubmit}>
+          <TextField
+            style={styles.textField}
+            ref={(username) => { userInput = username }}
+            id="username"
+            type="text"
+            placeholder="Username"
+            required
+            // autoFocus
+          />
+          <br />
+          <TextField
+            style={styles.textField}
+            ref={(password) => { passInput = password }}
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <br />
+          <RaisedButton
+            style={styles.button}
+            type="submit"
+            label={buttonLabel}
+          />
+        </form>
+      </div>
+      <GitHub />
     </div>
   )
 }
