@@ -1,6 +1,8 @@
 ## Nightlife Coordination App
 Paul Hoskinson (plhosk@gmail.com)
 
+<img alt="screenshot" src="https://github.com/plhosk/temp/raw/master/nightlife.png" width="512">
+
 - Find bars in your area.
 - See where other users of the app are planning to go.
 - While logged in, your search term will be saved.
